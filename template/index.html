@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unrestricted Image Generator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .card {
+            background-color: #1e1e1e;
+            border: none;
+        }
+
+        .form-control,
+        .form-range {
+            background-color: #2a2a2a;
+            color: #ffffff;
+            border-color: #444;
+        }
+
+        .btn-primary {
+            background-color: #6a11cb;
+            border-color: #6a11cb;
+        }
+
+        .btn-primary:hover {
+            background-color: #5a0fb5;
+            border-color: #5a0fb5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-dark text-center">
+                        <h1 class="h3">Unrestricted Image Generator</h1>
+                        <p class="mb-0">Generate any image without content filters</p>
+                    </div>
+                    <div class="card-body p-4">
+                        <form action="/generate" method="post">
+                            <div class="mb-3">
+                                <label for="prompt" class="form-label">Prompt</label>
+                                <textarea class="form-control" id="prompt" name="prompt" rows="3" required
+                                    placeholder="Describe the image you want to generate..."></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="negative_prompt" class="form-label">Negative Prompt (optional)</label>
+                                <textarea class="form-control" id="negative_prompt" name="negative_prompt" rows="2"
+                                    placeholder="What you don't want in the image..."></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="model" class="form-label">Model</label>
+                                <select class="form-control" id="model" name="model">
+                                    <option value="realistic">Realistic</option>
+                                    <option value="manga">Manga</option>
+                                    <option value="manga">japanese</option>
+                                </select>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="steps" class="form-label">Steps: <span id="stepsValue">20</span></label>
+                                    <input type="range" class="form-range" id="steps" name="steps" min="10" max="50"
+                                        value="20">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="guidance_scale" class="form-label">Guidance Scale: <span
+                                            id="guidanceValue">7.5</span></label>
+                                    <input type="range" class="form-range" id="guidance_scale" name="guidance_scale"
+                                        min="1" max="15" step="0.5" value="7.5">
+                                </div>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Generate Image</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('steps').addEventListener('input', function () {
+            document.getElementById('stepsValue').textContent = this.value;
+        });
+
+        document.getElementById('guidance_scale').addEventListener('input', function () {
+            document.getElementById('guidanceValue').textContent = this.value;
+        });
+    </script>
+</body>
+
+</html>
