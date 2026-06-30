@@ -45,7 +45,7 @@ manga_pipe = StableDiffusionPipeline.from_pretrained(
 print("Loading japanese model...")
 
 japanese_pipe = StableDiffusionPipeline.from_pretrained(
-    r"C:\Users\Sayam\Downloads\大人の女性1.safetensors",
+    r"大人の女性1.safetensors",
     torch_dtype=torch.float16,
     safety_checker=None,
     requires_safety_checker=False
