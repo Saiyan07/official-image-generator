@@ -45,7 +45,7 @@ manga_pipe = StableDiffusionPipeline.from_pretrained(
 print("Loading japanese model...")
 
 japanese_pipe = StableDiffusionPipeline.from_pretrained(
-    r"/blob/main/大人の女性1.safetensors",
+    "大人の女性1.safetensors",
     torch_dtype=torch.float16,
     safety_checker=None,
     requires_safety_checker=False
@@ -72,10 +72,10 @@ async def generate(
 ):
     if model == "manga":
         selected_pipe = manga_pipe
-    elif model =="Realistic":
+    elif model == "realistic":
         selected_pipe = realistic_pipe
     else:
-        selected_pipe =japanese_pipe
+        selected_pipe = japanese_pipe
     
     # Generate image
     with torch.autocast("cuda"):
@@ -97,14 +97,14 @@ async def generate(
     img_str = base64.b64encode(buffered.getvalue()).decode()
     
     return templates.TemplateResponse(
-    request=request,
-    name="result.html",
-    context={
-        "image": img_str,
-        "prompt": prompt,
-        "image_id": image_id
-    }
-)
+        request=request,
+        name="result.html",
+        context={
+            "image": img_str,
+            "prompt": prompt,
+            "image_id": image_id
+        }
+    )
 
 @app.get("/download/{image_id}")
 async def download(image_id: str):
